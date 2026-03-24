@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="description" content="En Su Punto - Empanadas, pizzas y comida rápida en tu zona. Pedidos por WhatsApp.">
+<meta name="theme-color" content="#f4b400">
+
+<!-- Precargar imágenes importantes -->
+<link rel="preload" as="image" href="empanadas.jpg">
+<link rel="preload" as="image" href="pizza.jpg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>En Su Punto</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
+  margin: 0;
+}
+
+h1 {
+  background: #f4b400;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  margin: 0;
+}
+
+.seccion {
+  padding: 20px;
+}
+
+.titulo {
+  color: #f4b400;
+  font-size: 24px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #f4b400;
+  display: inline-block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.producto {
+  background: #222;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.producto:hover {
+  transform: scale(1.05);
+}
+
+.producto img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.info {
+  padding: 10px;
+}
+
+.precio {
+  color: #f4b400;
+  font-weight: bold;
+}
+
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+}
+.instagram {
+  position: fixed;
+  bottom: 80px; /* arriba del de WhatsApp */
+  right: 20px;
+  background: linear-gradient(45deg, #feda75, #d62976, #962fbf);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+}
+.header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f4b400, #ffcc00);
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.5);
+  border-bottom: 3px solid #fff2;
+}
+
+.header h1 {
+  font-size: 45px;
+  margin: 0;
+  color: black;
+  text-shadow: 3px 3px 15px rgba(0,0,0,0.4);
+  letter-spacing: 3px;
+}
+.header h1:hover {
+  transform: scale(1.05);
+  transition: 0.2s;
+}
+.sub {
+  margin-top: 10px;
+  color: #222;
+  font-weight: bold;
+}
+
+/* animación */
+.header h1 {
+  animation: aparecer 1s ease;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.producto {
+  background: #222;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.producto:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0px 10px 25px rgba(0,0,0,0.5);
+}
+  
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: black;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>EN SU PUNTO 🥟</h1>
+  <p class="sub">Comida rápida al máximo sabor</p>
+</div>
+
+<!-- EMPANADAS -->
+<div class="seccion">
+<div class="titulo">EMPANADAS</div>
+
+<div class="grid">
+
+<div class="producto">
+<img src="https://i.pinimg.com/736x/02/9e/5f/029e5f69aa95cfc72aeb7d0840df0b07.jpg">
+<div class="info">
+<h3>Carne</h3>
+<p>Empanadas de carne picada con cebolla, morrón,
+huevo y condimientos seleccionados.</p>
+<p class="precio">½ Doc $6.000 | 1 Doc $10.000</p>
+</div>
+</div>
+
+<div class="producto">
+<img src="https://i.pinimg.com/1200x/8a/32/07/8a3207de275af136f6b4d323d418cea2.jpg">
+<div class="info">
+<h3>Pollo</h3>
+<p>Empanadas de pechuga de pollo desmenuzada
+salteadas con cebollas, morrón, huevo y
+condimentos.</p>
+<p class="precio">½ Doc $6.000 | 1 Doc $10.000</p>
+</div>
+</div>
+
+<div class="producto">
+<img src="https://i.pinimg.com/736x/12/31/ce/1231ce0c3a522b8ee43394a0bfb4e471.jpg">
+<div class="info">
+<h3>Jamón y Queso</h3>
+<p>Empanadas de Jamón y Queso con muzzarella,
+queso en barra y un exclusivo ingrediente que
+realza su sabor.</p>
+<p class="precio">½ Doc $6.000 | 1 Doc $10.000</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- PIZZAS -->
+<div class="seccion">
+<div class="titulo">PIZZAS</div>
+
+<div class="grid">
+
+<div class="producto">
+<img src="https://margherita.com.ar/wp-content/uploads/2019/05/mozzarella.jpg">
+<div class="info">
+<h3>Muzzarella</h3>
+<p>Salsa de tomate, queso muzzarella, oréganos,
+aceitunas, huevo (opcional).</p>
+<p class="precio">$7.000</p>
+</div>
+</div>
+
+<div class="producto">
+<img src="https://i.pinimg.com/1200x/b8/47/89/b8478957400d2a0d10e424e7c9a76824.jpg">
+<div class="info">
+<h3>Salsa de tomate, queso muzzarella, salme en
+rodajas, oréganos y aceitunas.</h3>
+<p>Con salame en rodajas</p>
+<p class="precio">$8.500</p>
+</div>
+</div>
+
+<div class="producto">
+<img src="https://i.pinimg.com/736x/bc/29/bc/bc29bcfc411be5eab871866eca86d791.jpg">
+<div class="info">
+<h3>Especial</h3>
+<p>Salsa de tomate, queso muzzarella, jamón,
+morrón, aceitunas y oreganos.</p>
+<p class="precio">$8.500</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- PIZZETAS -->
+<div class="seccion">
+<div class="titulo">PIZZETAS</div>
+
+<div class="grid">
+
+<div class="producto">
+<img src="https://i.pinimg.com/1200x/01/d2/38/01d238956a7dae9e95e41e1ebbbbc844.jpg">
+<div class="info">
+<h3>Clásicas</h3>
+<p>Base crocante con salsa de tomate, muzzarella,
+oreganos y aceitunas.</p>
+<p class="precio">½ $5.000 | 1 $9.000</p>
+</div>
+</div>
+
+<div class="producto">
+<img src="https://i.pinimg.com/1200x/d7/61/e2/d761e29481d0bebb83c5dd1123d62366.jpg">
+<div class="info">
+<h3>Especial</h3>
+<p>Base crocante, salsa de tomate, muzzarella,
+jamón, morrón y oreganos.</p>
+<p class="precio">½ $5.000 | 1 $9.000</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- BOTON WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/543772612587" target="_blank">
+📲 Pedir por WhatsApp
+</a>
+
+<a class="instagram" href="https://instagram.com/ensupuntodm" target="_blank">
+📸 Ver Instagram
+</a>
+  
+<!-- FOOTER -->
+<div class="footer">
+<p>📞 3772 612587 | 3772 406948</p>
+<p>📷 @ensupuntodm</p>
+<p>🕒 Todos los dias de 19hs a 00hs</p>
+<p>🚚 Envíos zona centro y barrios</p>
+</div>
+
+</body>
+</html>
