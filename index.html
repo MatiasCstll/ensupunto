@@ -34,11 +34,24 @@ h1 {
 }
 
 .titulo {
+  text-align: center;
+  font-family: 'Lilita One', cursive;
+  font-size: 34px;
   color: #f4b400;
-  font-size: 24px;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #f4b400;
-  display: inline-block;
+  margin: 40px 0 25px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(244,180,0,0.5);
+}
+
+/* Línea debajo */
+.titulo::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 3px;
+  background: #f4b400;
+  margin: 8px auto 0;
+  border-radius: 5px;
 }
 
 .grid {
@@ -46,6 +59,11 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 15px;
 }
+.BEBIDAS-grid {
+  display: flex;
+  gap: 15px;
+}
+
 
 /* --- ESTILOS DEL PRODUCTO CON EFECTOS --- */
 .producto {
@@ -194,6 +212,7 @@ h1 {
   <p class="sub">Comida rápida al máximo sabor</p>
 </div>
 
+
 <div class="seccion">
 <div class="titulo">EMPANADAS</div>
 
@@ -300,10 +319,27 @@ jamón, morrón y oreganos.</p>
 </div>
 </div>
 
+<div class="seccion">
+<div class="titulo">BEBIDAS</div>
+
+<div class="BEBIDAS-grid">
+
+<div class="producto" onclick="enviarPedido('Pepsi')">
+<img src="https://i.pinimg.com/1200x/88/52/cc/8852cc45f5d6cbd862875afcae4ff29a.jpg">
+<div class="info">
+<h3>Pepsi</h3>
+<p>Pepsi Original en Lata</p>
+<p class="precio">1 Lata $1.500</p>
+</div>
+</div>
+
+</div>
+</div>
+
 <script>
 function enviarPedido(producto) {
   const telefono = "543772612587";
-  const mensaje = encodeURIComponent(`¡Hola En Su Punto! 👋 Quisiera hacer un pedido de: ${producto}. ¿Me confirman el pedido?`);
+  const mensaje = encodeURIComponent(`¡Hola En Su Punto! Quisiera hacer un pedido de ${producto}. ¿Me confirman el pedido?`);
   const url = `https://wa.me/${telefono}?text=${mensaje}`;
   window.open(url, '_blank');
 }
