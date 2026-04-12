@@ -21,6 +21,19 @@ body {
   margin: 0;
 }
 
+.logo-titulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
 h1 {
   background: #f4b400;
   color: black;
@@ -41,6 +54,10 @@ h1 {
   margin: 40px 0 25px;
   letter-spacing: 2px;
   text-shadow: 0 0 10px rgba(244,180,0,0.5);
+}
+
+.header {
+  overflow: hidden;
 }
 
 /* Línea debajo */
@@ -64,6 +81,34 @@ h1 {
   gap: 15px;
 }
 
+.led {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: inline-block;
+
+  animation: parpadeo 1.5s infinite;
+}
+
+.abierto {
+  background: #25D366;
+  box-shadow: 0 0 10px #25D366, 0 0 20px #25D366;
+}
+
+.cerrado {
+  background: red;
+  box-shadow: 0 0 10px red, 0 0 20px red;
+}
+
+/* EFECTO LED */
+@keyframes parpadeo {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
 
 /* --- ESTILOS DEL PRODUCTO CON EFECTOS --- */
 .producto {
@@ -123,6 +168,12 @@ h1 {
   font-weight: bold;
 }
 
+.mapa {
+  margin-top: 15px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
 .whatsapp {
   position: fixed;
   bottom: 20px;
@@ -136,6 +187,7 @@ h1 {
   box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
   z-index: 100;
 }
+
 .instagram {
   position: fixed;
   bottom: 80px; /* arriba del de WhatsApp */
@@ -202,15 +254,92 @@ h1 {
   padding: 20px;
   background: black;
 }
+
+#carrito-box {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  width: 240px;
+
+  background: #1a1a1a;
+  padding: 12px;
+  border-radius: 15px;
+
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  z-index: 999;
+
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+#carrito-box h3 {
+  margin: 0 0 10px;
+  color: #f4b400;
+  text-align: center;
+}
+
+#lista-carrito li {
+  font-size: 13px;
+}
+
+/* DATOS */
+.datos-box {
+  margin-top: 10px;
+  background: #222;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.datos-box h4 {
+  margin: 0 0 5px;
+  font-size: 13px;
+  color: #f4b400;
+}
+
+.datos-box input {
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 6px;
+  font-size: 12px;
+
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+/* BOTÓN */
+#carrito-box button {
+  width: 100%;
+  margin-top: 8px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <h1>EN SU PUNTO 🥟</h1>
-  <p class="sub">Comida rápida al máximo sabor</p>
+<div id="carrito-box">
+  <h3>🛒 Tu Pedido</h3>
+
+  <ul id="lista-carrito"></ul>
+
+  <p id="total">Total: $0</p>
+
+  <button onclick="vaciarCarrito()" class="btn-vaciar">
+    ❌ Vaciar
+  </button>
 </div>
+
+<div class="header">
+<h1 class="logo-titulo">
+  <img src="gorro.png" class="logo">
+  EN SU PUNTO
+  </h1>
+  <p class="sub">Comida rápida al máximo sabor</p>
+  <div id="estado-local" class="led"></div>
+</div>
+
+<p id="estado-local" style="text-align:center; margin-top:10px;"></p>
 
 
 <div class="seccion">
@@ -218,7 +347,7 @@ h1 {
 
 <div class="grid">
 
-<div class="producto" onclick="enviarPedido('Empanadas de Carne')">
+<div class="producto" onclick="agregarProducto('Empanadas de Carne', 12000 , this)">
 <img src="empanadas de carne 2.jpeg">
 <div class="info">
 <h3>Carne</h3>
@@ -228,7 +357,7 @@ huevo y condimientos seleccionados.</p>
 </div>
 </div>
 
-<div class="producto" onclick="enviarPedido('Empanadas de Pollo')">
+<div class="producto" onclick="agregarProducto('Empanadas de Pollo', 12000 , this)">
 <img src="https://i.pinimg.com/1200x/8a/32/07/8a3207de275af136f6b4d323d418cea2.jpg">
 <div class="info">
 <h3>Pollo</h3>
@@ -239,7 +368,7 @@ condimentos.</p>
 </div>
 </div>
 
-<div class="producto" onclick="enviarPedido('Empanadas de Jamón y Queso')">
+<div class="producto" onclick="agregarProducto('Empanadas de Jamón y Queso', 12000 , this)">
 <img src="empanadas jyq.jpeg">
 <div class="info">
 <h3>Jamón y Queso</h3>
@@ -258,7 +387,7 @@ realza su sabor.</p>
 
 <div class="grid">
 
-<div class="producto" onclick="enviarPedido('Pizza Muzzarella')">
+<div class="producto" onclick="agregarProducto('Pizza Muzzarella', 7500 , this)">
 <img src="https://margherita.com.ar/wp-content/uploads/2019/05/mozzarella.jpg">
 <div class="info">
 <h3>Muzzarella</h3>
@@ -268,7 +397,7 @@ aceitunas, huevo (opcional).</p>
 </div>
 </div>
 
-<div class="producto" onclick="enviarPedido('Pizza Muzzarella con Salame')">
+<div class="producto" onclick="agregarProducto('Pizza Muzzarella con Salame', 9000 , this)">
 <img src="https://i.pinimg.com/1200x/b8/47/89/b8478957400d2a0d10e424e7c9a76824.jpg">
 <div class="info">
 <h3>Muzzarella con Salame</h3>
@@ -278,7 +407,7 @@ rodajas, oréganos y aceitunas.</p>
 </div>
 </div>
 
-<div class="producto" onclick="enviarPedido('Pizza Especial')">
+<div class="producto" onclick="agregarProducto('Pizza Especial', 9000 , this)">
 <img src="https://i.pinimg.com/736x/bc/29/bc/bc29bcfc411be5eab871866eca86d791.jpg">
 <div class="info">
 <h3>Especial</h3>
@@ -296,7 +425,7 @@ morrón, aceitunas y oreganos.</p>
 
 <div class="grid">
 
-<div class="producto" onclick="enviarPedido('Pizzetas Clásicas')">
+<div class="producto" onclick="agregarProducto('Pizzetas Clásicas', 9000 , this)">
 <img src="pizzetas.jpeg">
 <div class="info">
 <h3>Clásicas</h3>
@@ -306,7 +435,7 @@ oreganos y aceitunas.</p>
 </div>
 </div>
 
-<div class="producto" onclick="enviarPedido('Pizzetas Especial')">
+<div class="producto" onclick="agregarProducto('Pizzetas Especial', 9000 , this)">
 <img src="https://i.pinimg.com/1200x/d7/61/e2/d761e29481d0bebb83c5dd1123d62366.jpg">
 <div class="info">
 <h3>Especial</h3>
@@ -320,33 +449,229 @@ jamón, morrón y oreganos.</p>
 </div>
 
 <div class="seccion">
+<div class="titulo">Sandwich</div>
+
+<div class="grid">
+
+<div class="producto" onclick="agregarProducto('Sandwich de Milanesa', 7000 , this)">
+<img src="sandwich.jpeg">
+<div class="info">
+<h3>Sandwich de Milanesa</h3>
+<p>Milanesa de Carne o Pollo, con lechuga fresca, tomate, jamón, queso en fetas y aderezo a elección.</p>
+<p class="precio">$7.000</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="seccion">
 <div class="titulo">BEBIDAS</div>
 
 <div class="BEBIDAS-grid">
 
-<div class="producto" onclick="enviarPedido('Pepsi')">
+<div class="producto" onclick="agregarProducto('Pepsi', 1500 ,this)">
 <img src="https://i.pinimg.com/1200x/88/52/cc/8852cc45f5d6cbd862875afcae4ff29a.jpg">
 <div class="info">
 <h3>Pepsi</h3>
 <p>Pepsi Original en Lata</p>
-<p class="precio">1 Lata $1.500</p>
+<p class="precio">$1.500</p>
 </div>
 </div>
 
+<div class="producto" onclick="agregarProducto('Pepsi 2 lts', 3800 ,this)">
+<img src="https://http2.mlstatic.com/D_NQ_NP_684735-MLM49360615207_032022-O.webp">
+<div class="info">
+<h3>Pepsi 2 lts</h3>
+<p>Pepsi Original</p>
+<p class="precio">$3.800</p>
 </div>
+</div>
+
+<div class="producto" onclick="agregarProducto('Coca Cola 2,25 lts', 4500 , this)">
+<img src="https://coca-colaentucasa.com/media/catalog/product/6/-/6-ih_2.25l.jpg?optimize=low&fit=bounds&height=550&width=550&canvas=550:550">
+<div class="info">
+<h3>Coca Cola 2,25 lts</h3>
+<p>Coca Cola Original</p>
+<p class="precio">$4.500</p>
+</div>
+</div>
+
+<div class="producto" onclick="agregarProducto('Sprite 2,25 lts', 4500 , this)">
+<img src="https://jumboargentina.vtexassets.com/arquivos/ids/791803/Gaseosa-Sprite-Lima-Lim-n-2-25lts-Gaseosa-Sprite-Lima-lim-n-2-25-Lt-1-248213.jpg?v=638291793679300000">
+<div class="info">
+<h3>Sprite 2,25 lts</h3>
+<p>Sprite Original</p>
+<p class="precio">$4.500</p>
+</div>
+</div>
+
 </div>
 
 <script>
-function enviarPedido(producto) {
+let carrito = [];
+
+function agregarProducto(nombre, precio, elemento) {
+  const productoExistente = carrito.find(p => p.nombre === nombre);
+
+  if (productoExistente) {
+    productoExistente.cantidad++;
+  } else {
+    carrito.push({ nombre, precio, cantidad: 1 });
+  }
+
+  elemento.classList.add("seleccionado");
+
+  animacionAgregar(elemento);
+  sonido();
+
+  actualizarCarrito();
+}
+
+function actualizarCarrito() {
+  const lista = document.getElementById("lista-carrito");
+  const total = document.getElementById("total");
+
+  lista.innerHTML = "";
+
+  let totalPrecio = 0;
+
+  carrito.forEach((item, index) => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      ${item.nombre} x${item.cantidad} <br>
+      $${item.precio * item.cantidad}
+      <div>
+        <button onclick="sumar(${index})">➕</button>
+        <button onclick="restar(${index})">➖</button>
+        <button onclick="eliminar(${index})">❌</button>
+      </div>
+    `;
+
+    lista.appendChild(li);
+
+    totalPrecio += item.precio * item.cantidad;
+  });
+
+  total.textContent = "Total: $" + totalPrecio;
+}
+
+function sumar(index) {
+  carrito[index].cantidad++;
+  actualizarCarrito();
+}
+
+function restar(index) {
+  carrito[index].cantidad--;
+
+  if (carrito[index].cantidad <= 0) {
+    carrito.splice(index, 1);
+  }
+
+  actualizarCarrito();
+}
+
+function eliminar(index) {
+  carrito.splice(index, 1);
+  actualizarCarrito();
+}
+
+function vaciarCarrito() {
+  carrito = [];
+  actualizarCarrito();
+
+  document.querySelectorAll(".producto").forEach(p => {
+    p.classList.remove("seleccionado");
+  });
+}
+
+function enviarPedido() {
+  const ahora = new Date();
+  const hora = ahora.getHours();
+
+  if (hora < 18 || hora >= 24) {
+    alert("Estamos cerrados 😢 Abrimos a las 18hs");
+    return;
+  }
+
+  if (carrito.length === 0) {
+    alert("Agregá algo primero 😅");
+    return;
+  }
+
+  const nombre = document.getElementById("nombre").value.trim();
+  const direccion = document.getElementById("direccion").value.trim();
+  const referencia = document.getElementById("referencia").value.trim();
+
+  if (!nombre || !direccion) {
+    alert("Completá nombre y dirección 😅");
+    return;
+  }
+
   const telefono = "543772612587";
-  const mensaje = encodeURIComponent(`¡Hola En Su Punto! Quisiera hacer un pedido de ${producto}. ¿Me confirman el pedido?`);
+
+  let mensaje = "🛒 *Pedido En Su Punto* %0A%0A";
+
+  mensaje += `👤 Nombre: ${nombre}%0A`;
+  mensaje += `📍 Dirección: ${direccion}%0A`;
+
+  if (referencia) {
+    mensaje += `📝 Referencia: ${referencia}%0A`;
+  }
+
+  mensaje += "%0A🍔 Pedido:%0A";
+
+  carrito.forEach((item, index) => {
+    mensaje += `${index + 1}. ${item.nombre} x${item.cantidad} ($${item.precio * item.cantidad})%0A`;
+  });
+
+  let total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+
+  mensaje += `%0A💰 Total: $${total}`;
+
   const url = `https://wa.me/${telefono}?text=${mensaje}`;
   window.open(url, '_blank');
 }
+
+/* ANIMACIÓN */
+function animacionAgregar(el) {
+  el.style.transform = "scale(1.1)";
+  setTimeout(() => {
+    el.style.transform = "";
+  }, 150);
+}
+
+/* SONIDO */
+function sonido() {
+  const audio = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
+  audio.play();
+}
+
+function verificarHorario() {
+  const estado = document.getElementById("estado-local");
+
+  const ahora = new Date();
+  const hora = ahora.getHours();
+
+  const abre = 18;
+  const cierra = 24;
+
+  if (hora >= abre && hora < cierra) {
+    estado.textContent = "🟢 ABIERTO - PEDÍ SIN PROBLEMA 😎";
+    estado.className = "led abierto";
+  } else {
+    estado.textContent = "🔴 CERRADO - ABRIMOS 18HS";
+    estado.className = "led cerrado";
+  }
+}
+
+verificarHorario();
+
 </script>
 
-<a class="whatsapp" href="https://wa.me/543772612587" target="_blank">
-📲 Pedir por WhatsApp
+<a class="whatsapp" href="#" onclick="enviarPedido()">
+📲 Enviar pedido
 </a>
 
 <a class="instagram" href="https://instagram.com/ensupuntodm" target="_blank">
@@ -356,9 +681,48 @@ function enviarPedido(producto) {
 <div class="footer">
 <p>📞 3772 612587 | 3772 406948</p>
 <p>📷 @ensupuntodm</p>
-<p>🕒 Todos los dias de 19hs a 00hs</p>
+<p>🕒 Todos los dias de 18hs a 00hs</p>
 <p>🚚 Envíos zona centro y barrios</p>
 </div>
+
+<div id="carrito-box">
+
+  <h3>🛒 Tu Pedido</h3>
+
+  <ul id="lista-carrito"></ul>
+
+  <div class="datos-box">
+    <h4>📋 Datos</h4>
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="direccion" placeholder="Dirección">
+    <input type="text" id="referencia" placeholder="Ref. (opcional)">
+  </div>
+
+  <p id="total">Total: $0</p>
+
+  <button onclick="vaciarCarrito()">❌ Vaciar</button>
+
+</div>
+
+<div class="seccion">
+  <div class="titulo">📍 Zona de Entrega</div>
+
+  <div class="mapa">
+    <iframe 
+      src="https://www.google.com/maps?q=Paso+de+los+Libres+Corrientes&output=embed"
+      width="100%" 
+      height="300" 
+      style="border:0; border-radius:15px;"
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <p style="text-align:center; margin-top:10px;">
+    Precios de envío dependiendo de tu zona ⚠️
+  </p>
+</div>
+
 
 </body>
 </html>
