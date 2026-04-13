@@ -282,35 +282,43 @@ h1 {
   font-size: 13px;
 }
 
-/* DATOS */
-.datos-box {
-  margin-top: 10px;
-  background: #222;
-  padding: 8px;
-  border-radius: 10px;
-}
-
-.datos-box h4 {
-  margin: 0 0 5px;
-  font-size: 13px;
-  color: #f4b400;
-}
-
-.datos-box input {
-  width: 100%;
-  margin-bottom: 5px;
-  padding: 6px;
-  font-size: 12px;
-
-  border-radius: 6px;
-  border: none;
-  outline: none;
+#lista-carrito li {
+  margin-bottom: 8px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
 }
 
 /* BOTÓN */
 #carrito-box button {
   width: 100%;
   margin-top: 8px;
+}
+
+#lista-carrito button {
+  background: #eee;
+  border: none;
+  border-radius: 5px;
+
+  padding: 4px 6px;
+  margin: 2px;
+
+  font-size: 12px;
+  cursor: pointer;
+
+  width: auto; /* 👈 clave para que no sean largos */
+}
+
+/* colores */
+#lista-carrito button:nth-child(1) {
+  color: green; /* + */
+}
+
+#lista-carrito button:nth-child(2) {
+  color: orange; /* - */
+}
+
+#lista-carrito button:nth-child(3) {
+  color: red; /* X */
 }
 
 </style>
@@ -600,14 +608,9 @@ function enviarPedido() {
     return;
   }
 
-  const nombre = document.getElementById("nombre").value.trim();
-  const direccion = document.getElementById("direccion").value.trim();
-  const referencia = document.getElementById("referencia").value.trim();
-
-  if (!nombre || !direccion) {
-    alert("Completá nombre y dirección 😅");
-    return;
-  }
+  let nombre = "Cliente";
+  let direccion = "A confirmar por WhatsApp";
+  let referencia = "";
 
   const telefono = "543772612587";
 
@@ -683,25 +686,6 @@ verificarHorario();
 <p>📷 @ensupuntodm</p>
 <p>🕒 Todos los dias de 18hs a 00hs</p>
 <p>🚚 Envíos zona centro y barrios</p>
-</div>
-
-<div id="carrito-box">
-
-  <h3>🛒 Tu Pedido</h3>
-
-  <ul id="lista-carrito"></ul>
-
-  <div class="datos-box">
-    <h4>📋 Datos</h4>
-    <input type="text" id="nombre" placeholder="Nombre">
-    <input type="text" id="direccion" placeholder="Dirección">
-    <input type="text" id="referencia" placeholder="Ref. (opcional)">
-  </div>
-
-  <p id="total">Total: $0</p>
-
-  <button onclick="vaciarCarrito()">❌ Vaciar</button>
-
 </div>
 
 <div class="seccion">
